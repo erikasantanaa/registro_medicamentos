@@ -1,6 +1,5 @@
-/**conexão ao banco de dados -  OK*/
-
-const mysql = require('mysql');
+/**armazenar as informações e conectar ao banco de dados */
+const mysql = require('mysql')
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -9,10 +8,11 @@ const connection = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
-//conexão
+//conectar ao banco de dados pelo nome do banco
 connection.connect((error) => {
     if (error) throw error;
-    console.log(`Conectado ao Banco de Dados: ${process.env.DB_NAME}`)
+    console.log(`conectado ao banco de dados: ${process.env.DB_NAME}`)
 });
 
-module.exports = connection;
+module.exports = connection
+

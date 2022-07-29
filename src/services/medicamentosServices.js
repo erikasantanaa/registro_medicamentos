@@ -1,19 +1,33 @@
 /**Responsável pelo banco de dados */
-
 const db = require('../db');
 
-//requisição ao banco de dados - pegar informações bd , ver no resttesttest
+//requisição ao banco de dados
 module.exports = {
-    buscartodos: () => {
-        return new Promise((aceito, rejeitado) => {
 
+    buscarTodos: () => {
+        return new Promise((aceito, rejeitado) => {
+            
             db.query('SELECT * FROM medicamento', (error, results) => {
-                if(error) {
-                    rejeitado(error);
+                if(error) { 
+                    rejeitado(error); 
                     return
                 }
                 aceito(results)
-            })
-        })
+            });
+        });
+    },
+
+    inserir: (medicamento_nome, medicamento_codigo_barras) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('INSERT INTO medicamento (medicamento_nome, medicamento_codigo_barras) VALUES (?, ?)', 
+                [medicamento_nome, medicamento_codigo_barras],
+                (error,results) => {
+                    if(error) { rejeitado(error); return; }
+                    aceito(results.insertCodigo);
+                }
+            );
+        });
     }
 };
+

@@ -1,27 +1,24 @@
-//servidor  - OK
+//servidor 
 
-//caminho do arquivo variaveis.env
-require('dotenv').config({ path:'variaveis.env'});
+//caminho
+require('dotenv').config({path:'variaveis.env'})
 
-//exigindo as dependências
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+//exigindo as dependencias
+const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+//Routes ( rotas do projeto). Coloca todos em uso.
+const routes = require('./routes')
 
-//colocar a rota do projeto
-const routes = require('./routes');
-
-//usar cors- api com dominios diferentes
-const server = express();
-server.use(cors());
-server.use(bodyParser.urlencoded({extended: false}));
-
+//usando cors- api com dominios diferentes
+const server = express()
+server.use(cors())
+server.use(bodyParser.urlencoded({extended: false}))
 server.use('/api', routes);
 
+//conectar o servidor com o banco de dados
 server.listen(process.env.PORT, () => {
     console.log(`Servidor rodando em: http://localhost:${process.env.PORT}`)
-});
-
-
+})
 
 
